@@ -11,7 +11,11 @@
                 <h4>想吃烧烤~</h4>
                 <p id="userid">UID:198493875</p>
             </div>
-            <button @click="copy()">点击复制</button>
+            <button
+                class="tag-read"
+                @click="copy"
+                :data-clipboard-text="userId"
+            >点击复制</button>
         </div>
         <div class="twomsg">
             <ul>
@@ -105,19 +109,33 @@
 </template>
 
 <script>
-import Clipboard from 'clipboard'
+import Clipboard from 'clipboard';
 import BottomFixed from './BottomFixed'
 export default {
   components: { BottomFixed },
   data() {
-    return {}
+    return {
+        userId:'198493875'
+    }
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     jumpUrl(e) {
       this.$router.push({ path: '/' + e })
     },
-    copy() {}
+    copy() {
+      var clipboard = new Clipboard('.tag-read')
+      console.log(clipboard)
+      clipboard.on('success', () => {
+       this.$toast('复制成功')
+        clipboard.destroy()
+      })
+      clipboard.on('error', () => {
+        this.$toast('复制出错啦,请再试一遍!')
+        clipboard.destroy()
+      })
+    }
   }
 }
 </script>
