@@ -34,3 +34,5 @@ Integral : 积分明细页面
 Personal : 个人中心页面
 CommissionRules : 佣金规则页面
 chongzhiIntegral : 充值积分页面
+RechargeRecord : 充值记录页面
+RechargeRecordNoData : 充值记录为空页面

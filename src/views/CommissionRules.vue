@@ -50,6 +50,8 @@ export default {
 
 <style lang="less" scoped>
 #commissionRules-page {
+  background: rgba(245, 245, 245, 1);
+  padding-bottom: 30vw;
   .rules {
     padding: 6.3vw 8.2vw 0;
     width: 100%;

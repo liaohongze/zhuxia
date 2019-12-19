@@ -1,11 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import getReceive from "../views/getReceive.vue";
-import personal from "../views/Personal.vue";
-import commission from "../views/Commission.vue";
-import integral from "../views/Integral.vue";
-import commissionRules from "../views/CommissionRules.vue";
-import chongzhiIntegral from "../views/chongzhiIntegral.vue";
+import getReceive from "../views/getReceive";
+import personal from "../views/Personal";
+import commission from "../views/Commission";
+import integral from "../views/Integral";
+import commissionRules from "../views/CommissionRules";
+import chongzhiIntegral from "../views/chongzhiIntegral";
+import RechargeRecord from "../views/RechargeRecord";
+import RechargeRecordNoData from "../views/RechargeRecordNoData";
+import InvitationList from "../views/InvitationList";
 
 Vue.use(VueRouter)
 
@@ -50,6 +53,27 @@ const routes = [{
     meta: {
     },
     component: chongzhiIntegral
+  },
+  {
+    path: "/RechargeRecord",
+    name: "RechargeRecord",
+    meta: {
+    },
+    component: RechargeRecord
+  },
+  {
+    path: "/RechargeRecordNoData",
+    name: "RechargeRecordNoData",
+    meta: {
+    },
+    component: RechargeRecordNoData
+  },
+  {
+    path: "/InvitationList",
+    name: "InvitationList",
+    meta: {
+    },
+    component: InvitationList
   },
 ]
 

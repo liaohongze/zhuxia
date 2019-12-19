@@ -1,5 +1,5 @@
 <template>
-    <div id="personal-page">
+    <div id="commission-page">
         <div class="top_bg">
             <div class="first_div">
                 <p>当前可提现佣金(元)</p>
@@ -136,6 +136,9 @@ export default {
 
 
 <style lang="less" scoped>
+#commission-page{
+  background: rgba(245, 245, 245, 1);
+}
 .top_bg {
   width: 100%;
   height: 46.3vw;

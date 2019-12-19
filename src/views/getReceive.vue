@@ -104,6 +104,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#getReceive1{
+  background: rgba(245, 245, 245, 1);
+}
 .top_bg {
   width: 100%;
   height: 33.3vw;

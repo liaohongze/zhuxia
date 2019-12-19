@@ -117,6 +117,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#SelectType{
+  padding-bottom: 5vw;
+}
 .title_name {
   height: 9.4vw;
   width: 100%;
@@ -202,7 +205,7 @@ export default {
   margin: 0 auto;
   padding: 5.3vw 0 0 4.8vw;
   text-align: left;
-  margin-bottom: 20vw;
+  margin-bottom: 15vw;
   h3 {
     height: 3.8vw;
     line-height: 1;
