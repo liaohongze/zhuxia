@@ -1,132 +1,152 @@
 <template>
-    <div id="personal-page">
-        <div class="top_bg">
-            <div class="userimg">
-                <img
-                    src="@/assets/images/user-img1.png"
-                    alt="0元购"
-                >
-            </div>
-            <div class="username">
-                <h4>想吃烧烤~</h4>
-                <p id="userid">UID:198493875</p>
-            </div>
-            <button
-                class="tag-read"
-                @click="copy"
-                :data-clipboard-text="userId"
-            >点击复制</button>
-        </div>
-        <div class="twomsg">
-            <ul>
-                <li>
-                    <h3>12</h3>
-                    <span>积分</span>
-                    <p>
-                        <img
-                            src="@/assets/images/jifen-icon.png"
-                            alt="0元购"
-                        >
-                        <a href=""> 查看积分></a>
-                    </p>
-                </li>
-                <li>
-                    <h3>99</h3>
-                    <span>元</span>
-                    <p>
-                        <img
-                            src="@/assets/images/yongjin-icon.png"
-                            alt="0元购"
-                        >
-                        <a href=""> 体现佣金></a>
-                    </p>
-                </li>
-            </ul>
-        </div>
-        <div class="hengfu">
-            <p>邀请好友加入~赠12积分，赚20%佣金</p>
-        </div>
-        <div class="datalist">
-            <ul>
-                <a href="">
-                    <li>
-                        <img
-                            src="@/assets/images/jifen_img.png"
-                            alt="积分充值"
-                        >
-                        <p>积分充值</p>
-                    </li>
-                </a>
-                <a href="">
-                    <li>
-                        <img
-                            src="@/assets/images/haoyou_img.png"
-                            alt="好友列表"
-                        >
-                        <p>好友列表</p>
-                    </li>
-                </a>
-                <a href="">
-                    <li>
-                        <img
-                            src="@/assets/images/wenti_img.png"
-                            alt="常见问题"
-                        >
-                        <p>常见问题</p>
-                    </li>
-                </a>
-                <a href="">
-                    <li>
-                        <img
-                            src="@/assets/images/yaoqing_img.png"
-                            alt="邀请好友"
-                        >
-                        <p>邀请好友</p>
-                    </li>
-                </a>
-                <a href="">
-                    <li>
-                        <img
-                            src="@/assets/images/xiaoxi_img.png"
-                            alt="联系客服"
-                        >
-                        <p>联系客服</p>
-                    </li>
-                </a>
-                <a href="">
-                    <li>
-                        <img
-                            src="@/assets/images/liwu_img.png"
-                            alt="福利中心"
-                        >
-                        <p>福利中心</p>
-                    </li>
-                </a>
-            </ul>
-        </div>
-        <BottomFixed />
+  <div id="personal-page">
+    <div class="top_bg">
+      <div class="userimg">
+        <img
+          src="@/assets/images/user-img1.png"
+          alt="0元购"
+        >
+      </div>
+      <div class="username">
+        <h4>想吃烧烤~</h4>
+        <p id="userid">UID:198493875</p>
+      </div>
+      <button
+        class="tag-read"
+        @click="copy"
+        :data-clipboard-text="userId"
+      >点击复制</button>
     </div>
+    <div class="twomsg">
+      <ul>
+        <li>
+          <h3>12</h3>
+          <span>积分</span>
+          <p>
+            <img
+              src="@/assets/images/jifen-icon.png"
+              alt="0元购"
+            >
+            <a href=""> 查看积分></a>
+          </p>
+        </li>
+        <li>
+          <h3>99</h3>
+          <span>元</span>
+          <p>
+            <img
+              src="@/assets/images/yongjin-icon.png"
+              alt="0元购"
+            >
+            <a href=""> 体现佣金></a>
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div class="hengfu">
+      <p>邀请好友加入~赠12积分，赚20%佣金</p>
+    </div>
+    <div class="datalist">
+      <ul>
+        <a href="">
+          <li>
+            <img
+              src="@/assets/images/jifen_img.png"
+              alt="积分充值"
+            >
+            <p>积分充值</p>
+          </li>
+        </a>
+        <a href="">
+          <li>
+            <img
+              src="@/assets/images/haoyou_img.png"
+              alt="好友列表"
+            >
+            <p>好友列表</p>
+          </li>
+        </a>
+        <a href="">
+          <li>
+            <img
+              src="@/assets/images/wenti_img.png"
+              alt="常见问题"
+            >
+            <p>常见问题</p>
+          </li>
+        </a>
+        <a href="">
+          <li>
+            <img
+              src="@/assets/images/yaoqing_img.png"
+              alt="邀请好友"
+            >
+            <p>邀请好友</p>
+          </li>
+        </a>
+        <a href="">
+          <li>
+            <img
+              src="@/assets/images/xiaoxi_img.png"
+              alt="联系客服"
+            >
+            <p>联系客服</p>
+          </li>
+        </a>
+        <a href="">
+          <li>
+            <img
+              src="@/assets/images/liwu_img.png"
+              alt="福利中心"
+            >
+            <p>福利中心</p>
+          </li>
+        </a>
+      </ul>
+      <van-overlay
+        :show="show"
+        @click="show = false"
+      >
+        <div class="wrapper">
+          <div class="block">
+            <h3>公告</h3>
+            <img
+              src="@/assets/images/close-btn.png"
+              alt="福利中心"
+            >
+            <p>活动期间,邀请好发可得好友充值金额的20% (直接下线)
+              10(间接下线)提成(活动解释权归活动方所有)
+              详情情查看返佣规则赶紧</p>
+            <button>我知道了</button>
+          </div>
+        </div>
+      </van-overlay>
+    </div>
+    <BottomFixed />
+  </div>
 </template>
 
 <script>
-import Clipboard from 'clipboard';
+import Clipboard from 'clipboard'
 import BottomFixed from './BottomFixed'
 export default {
   components: { BottomFixed },
   data() {
     return {
-        userId:'198493875'
+      userId: '198493875',
+      show: false
     }
   },
   mounted() {
-        this.$dialog
-          .alert({
-            title: '标题',
-            message: '弹窗内容'
-          })
-          .then(() => {
-            console.log(122222)
-          })
+    this.show = true
+    // this.$dialog
+    //   .alert({
+    //     title: '标题',
+    //     message: '弹窗内容'
+    //   })
+    //   .then(() => {
+    //     console.log(122222)
+    //   })
   },
   methods: {
     jumpUrl(e) {
@@ -136,7 +156,7 @@ export default {
       var clipboard = new Clipboard('.tag-read')
       console.log(clipboard)
       clipboard.on('success', () => {
-       this.$toast('复制成功')
+        this.$toast('复制成功')
         clipboard.destroy()
       })
       clipboard.on('error', () => {
@@ -337,6 +357,53 @@ export default {
         margin-right: 0;
       }
     }
+  }
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block {
+  width: 69.8vw;
+  height: 48.5vw;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 1.1vw;
+  padding: 3vw 4.85vw 0;
+  position: relative;
+  img {
+    position: absolute;
+    right: 4.6vw;
+    top: 3vw;
+    width: 3.15vw;
+    height: 3.15vw;
+  }
+  h3 {
+    height: 4.3vw;
+    line-height: 1;
+    font-size: 4.4vw;
+    font-weight: 600;
+    color: rgba(40, 111, 255, 1);
+  }
+  p {
+    font-size: 3.7vw;
+    font-weight: 400;
+    color: rgba(18, 18, 18, 1);
+    line-height: 5.6vw;
+    text-align: justify;
+    margin-top: 2.5vw;
+  }
+  button {
+    width: 46.9vw;
+    height: 7.4vw;
+    background: rgba(40, 111, 255, 1);
+    border-radius: 3.7vw;
+    font-size: 3.7vw;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    margin-top: 2.5vw;
   }
 }
 </style>

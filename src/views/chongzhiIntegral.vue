@@ -11,9 +11,11 @@
                 <h4>想吃烧烤~</h4>
                 <p>积分：{{integralNum}}</p>
             </div>
+            <router-link to="./RechargeRecord">
             <div class="chongzhirecord">
                 <span>充值记录</span>
             </div>
+            </router-link>
         </div>
         <div class="chongzhileixing">
             <h4>请选择充值金额</h4>
@@ -46,7 +48,12 @@
                 <div
                     class="wrapper"
                 >
-                    <div class="block" />
+                    <div class="block" >
+                      <img 
+                      :src="erweimasrc"
+                      alt=""
+                      >
+                    </div>
                 </div>
             </van-overlay>
             <div class="rechargeRules">
@@ -73,6 +80,7 @@ export default {
       show: false,
       integralNum: 2345,
       defaultIndex: 0,
+      erweimasrc:require('@/assets/images/tc_erweima.png'),
       typeList: [
         { howIntegral: 10, saleMoney: 1, saveMoney: 10 },
         { howIntegral: 60, saleMoney: 5, saveMoney: 50 },
@@ -306,6 +314,14 @@ export default {
   height: 75.2vw;
   background:url(../assets/images/erweima_tc.png) no-repeat;
   background-size: 100%;
+  position: relative;
+  img{
+    width: 31.5vw;
+    height: 31.5vw;
+    position: absolute;
+    top: 29.2vw;
+    left: 18.9vw;
+  }
 }
 </style>
 

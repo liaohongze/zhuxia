@@ -8,7 +8,10 @@
           :autoplay="3000"
           stop-propagation
         >
-          <van-swipe-item v-for="(item,index) in lunboList" :key="index">
+          <van-swipe-item
+            v-for="(item,index) in lunboList"
+            :key="index"
+          >
             <img
               src="@/assets/images/wenzilunbo_icon.png"
               alt=""
@@ -82,18 +85,18 @@ export default {
   components: { BottomFixed, SelectType },
   data() {
     return {
-      lunboList:[
+      lunboList: [
         {
-          name:'蔡**凤',
-          time:'在10秒前领取5元红包'
+          name: '蔡**凤',
+          time: '在10秒前领取5元红包'
         },
-         {
-          name:'蔡**凤',
-          time:'在10秒前领取5元红包'
+        {
+          name: '蔡**凤',
+          time: '在10秒前领取5元红包'
         },
-         {
-          name:'蔡**凤',
-          time:'在10秒前领取5元红包'
+        {
+          name: '蔡**凤',
+          time: '在10秒前领取5元红包'
         }
       ]
     }
@@ -104,7 +107,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-#getReceive1{
+#getReceive1 {
   background: rgba(245, 245, 245, 1);
 }
 .top_bg {

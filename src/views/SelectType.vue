@@ -43,6 +43,9 @@
             <p>3.饿了么红包领取统一规则！</p>
             <p>4.饿了么红包领取统一规则！</p>
         </div>
+         <!-- <van-cell is-link @click="showPopup">展示弹出层</van-cell> -->
+
+      <van-popup v-model="show">很抱歉，领取失败，错误结果很抱歉，领取失败，错误结果</van-popup>
     </div>
 </template>
 
@@ -50,6 +53,7 @@
 export default {
   data() {
     return {
+          show: false,      
       getReceiveType: [
         {
           title: '通用红包组合',
@@ -106,6 +110,7 @@ export default {
             message: '加载中...',
             forbidClick: true
         });
+         this.show = true; //弹窗
       } else {
         //   号码验证失败
         this.$toast('手机号码格式不正确')
@@ -259,5 +264,19 @@ export default {
       margin-bottom: 0;
     }
   }
+}
+/deep/
+.van-popup{
+  width:60.6vw;
+  height:18.7vw;
+  background:linear-gradient(88deg,rgba(41,87,255,1),rgba(39,134,255,1));
+  border-radius:9.4vw;
+  font-size:3.6vw;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height:5vw;
+  text-align: left;
+  padding: 4.6vw 6.4vw 0;
+
 }
 </style>
