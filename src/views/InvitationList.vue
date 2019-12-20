@@ -56,8 +56,27 @@
       </div>
     </div>
     <div class="invitationList">
-      <button>马上邀请</button>
+      <button @click="openPopup">马上邀请</button>
     </div>
+    <van-popup
+      v-model="show"
+      position="bottom"
+      :style="{ height: '100%' }"
+    >
+      <img
+        src="@/assets/images/share_bg.png"
+        alt="邀请"
+      >
+      <div
+        class="close-btn"
+        @click="closePopup"
+      >
+        <img
+          src="@/assets/images/close-btn.png"
+          alt="关闭"
+        >
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -66,7 +85,7 @@ export default {
   components: {},
   data() {
     return {
-      type: 1,
+      show: false,
       recordList: [
         {
           src: require('@/assets/images/user_small_1.png'),
@@ -97,31 +116,6 @@ export default {
           src: require('@/assets/images/user_small_3.png'),
           username: '想看电影',
           withdrawalTime: '2019-11-29  21:19:09'
-        },
-        {
-          src: require('@/assets/images/user_small_3.png'),
-          username: '想看电影',
-          withdrawalTime: '2019-11-29  21:19:09'
-        },
-        {
-          src: require('@/assets/images/user_small_3.png'),
-          username: '想看电影',
-          withdrawalTime: '2019-11-29  21:19:09'
-        },
-        {
-          src: require('@/assets/images/user_small_3.png'),
-          username: '想看电影',
-          withdrawalTime: '2019-11-29  21:19:09'
-        },
-        {
-          src: require('@/assets/images/user_small_3.png'),
-          username: '想看电影',
-          withdrawalTime: '2019-11-29  21:19:09'
-        },
-        {
-          src: require('@/assets/images/user_small_3.png'),
-          username: '想看电影',
-          withdrawalTime: '2019-11-29  21:19:09'
         }
       ]
     }
@@ -130,6 +124,12 @@ export default {
   methods: {
     jumpUrl(e) {
       this.$router.push({ path: '/' + e })
+    },
+    openPopup() {
+      this.show = true
+    },
+    closePopup() {
+      this.show = false
     }
   }
 }
@@ -313,6 +313,25 @@ export default {
     font-size: 4.3vw;
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
+  }
+}
+/deep/.van-popup {
+  background-color: rgba(33, 3, 33, 0.1);
+  background-size: 93%;
+  bottom: 0vw;
+  img {
+    width: 92%;
+    margin-top: 10vw;
+  }
+  .close-btn {
+    position: absolute;
+    top: -7vw;
+    right: 5vw;
+    cursor: pointer;
+    img {
+      width: 4vw;
+      height: 4vw;
+    }
   }
 }
 </style>
