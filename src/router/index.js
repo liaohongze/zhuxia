@@ -7,8 +7,8 @@ import integral from "../views/Integral";
 import commissionRules from "../views/CommissionRules";
 import chongzhiIntegral from "../views/chongzhiIntegral";
 import RechargeRecord from "../views/RechargeRecord";
-import RechargeRecordNoData from "../views/RechargeRecordNoData";
 import InvitationList from "../views/InvitationList";
+import WelfareCentre from "../views/WelfareCentre";
 
 Vue.use(VueRouter)
 
@@ -62,18 +62,18 @@ const routes = [{
     component: RechargeRecord
   },
   {
-    path: "/RechargeRecordNoData",
-    name: "RechargeRecordNoData",
-    meta: {
-    },
-    component: RechargeRecordNoData
-  },
-  {
     path: "/InvitationList",
     name: "InvitationList",
     meta: {
     },
     component: InvitationList
+  },
+  {
+    path: "/WelfareCentre",
+    name: "WelfareCentre",
+    meta: {
+    },
+    component: WelfareCentre
   },
 ]
 

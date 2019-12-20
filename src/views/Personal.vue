@@ -119,6 +119,14 @@ export default {
     }
   },
   mounted() {
+        this.$dialog
+          .alert({
+            title: '标题',
+            message: '弹窗内容'
+          })
+          .then(() => {
+            console.log(122222)
+          })
   },
   methods: {
     jumpUrl(e) {

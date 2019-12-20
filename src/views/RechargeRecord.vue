@@ -1,28 +1,37 @@
 <template>
-    <div id="RechargeRecord-page">
-        <div class="record">
-            <div class="recordList">
-                <ul>
-                    <li
-                        v-for="(item,index) in recordList"
-                        :key="index"
-                    >
-                        <div class="recordlf">
-                            <div>
-                                <p>{{item.title}}</p>
-                                <p>{{item.operationTime}}</p>
-                            </div>
-                        </div>
-                        <div class="recordrt">
-                            <span>{{item.operationMoney}}</span>
-                        </div>
-                        <div class="clear"></div>
-                    </li>
-                </ul>
+  <div id="RechargeRecord-page">
+    <div class="record" v-if="recordList.length">
+      <div class="recordList">
+        <ul>
+          <li
+            v-for="(item,index) in recordList"
+            :key="index"
+          >
+            <div class="recordlf">
+              <div>
+                <p>{{item.title}}</p>
+                <p>{{item.operationTime}}</p>
+              </div>
             </div>
-            <p class="allData">已加载全部</p>
-        </div>
+            <div class="recordrt">
+              <span>{{item.operationMoney}}</span>
+            </div>
+            <div class="clear"></div>
+          </li>
+        </ul>
+      </div>
+      <p class="allData">已加载全部</p>
     </div>
+    <div id="RechargeRecordNoData-page" v-if="!recordList.length">
+      <div class="nodata">
+        <img
+          src="@/assets/images/noData-img.png"
+          alt=""
+        >
+        <p>暂无充值记录</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -41,6 +50,21 @@ export default {
           title: '积分充值',
           operationTime: '2019-11-29  21:19:09',
           operationMoney: '5.00'
+        },
+        {
+          title: '积分充值',
+          operationTime: '2019-11-29  21:19:09',
+          operationMoney: '1.00'
+        },
+        {
+          title: '积分充值',
+          operationTime: '2019-11-29  21:19:09',
+          operationMoney: '1.00'
+        },
+        {
+          title: '积分充值',
+          operationTime: '2019-11-29  21:19:09',
+          operationMoney: '1.00'
         },
         {
           title: '积分充值',
@@ -126,6 +150,26 @@ export default {
       font-weight: 400;
       color: rgba(138, 138, 138, 1);
       margin-top: 3.5vw;
+    }
+  }
+  #RechargeRecordNoData-page {
+    background: rgba(245, 245, 245, 1);
+    width: 100%;
+    height: 177.5vw;
+    .nodata {
+      width: 100%;
+      padding-top: 50vw;
+      img {
+        width: 48.2vw;
+      }
+      p {
+        margin-top: 7.2vw;
+        height: 3.7vw;
+        font-size: 3.7vw;
+        font-weight: bold;
+        color: rgba(179, 179, 179, 1);
+        line-height: 1;
+      }
     }
   }
 }
