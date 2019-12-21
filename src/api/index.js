@@ -1,8 +1,8 @@
 import request from './request'
+import token from './modules/token'
 
 // 导入api模块
 const apis = [...token]
-import token from './modules/token'
 let api = {}
 // addPrefix(apis)
 

@@ -101,12 +101,9 @@ export default {
       ]
     }
   },
-  created(){
+  created() {
     this.$axios.post('/api/v1/token',{
-      params:{
         code:'17605983674'
-      },
-      headers: {'Content-Type': 'application/json;charset=UTF-8'}
     })
     .then(res=>{
       console.log(res)
@@ -115,8 +112,11 @@ export default {
        console.log(err)
     })
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+  },
+  methods: {
+   
+  }
 }
 </script>
 

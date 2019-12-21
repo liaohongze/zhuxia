@@ -10,7 +10,6 @@ import api from './api'
 
 Vue.prototype.$api = api
 Vue.config.productionTip = false;
-axios.defaults.baseURL = 'http://dev.yituoke.ac.cn/';
 Vue.use(Vant,axios);
 Vue.prototype.$axios=axios
 
