@@ -103,7 +103,7 @@ export default {
   },
   created() {
     this.$axios.post('/api/v1/token',{
-        code:'17605983674'
+        code:this.$Request.code
     })
     .then(res=>{
       console.log(res)

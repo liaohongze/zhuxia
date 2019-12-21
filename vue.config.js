@@ -16,7 +16,6 @@ module.exports = {
         ws: true,
         pathRewrite: {
           // 重写路径
-          '^/api': ''
         }
       }
     }
