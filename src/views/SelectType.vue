@@ -53,7 +53,7 @@
 export default {
   data() {
     return {
-          show: false,      
+        show: false,      
       getReceiveType: [
         {
           title: '通用红包组合',

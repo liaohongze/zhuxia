@@ -101,6 +101,20 @@ export default {
       ]
     }
   },
+  created(){
+    this.$axios.post('/api/v1/token',{
+      params:{
+        code:'17605983674'
+      },
+      headers: {'Content-Type': 'application/json;charset=UTF-8'}
+    })
+    .then(res=>{
+      console.log(res)
+    })
+    .catch(err=>{
+       console.log(err)
+    })
+  },
   mounted() {},
   methods: {}
 }
