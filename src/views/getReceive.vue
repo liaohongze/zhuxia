@@ -106,7 +106,9 @@ export default {
         code:this.$Request.code
     })
     .then(res=>{
-      console.log(res)
+      console.log(res,1)
+      // console.log(res.data.data.token)
+      localStorage.setItem('user_info',res.data.data.token)
     })
     .catch(err=>{
        console.log(err)
