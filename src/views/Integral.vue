@@ -1,39 +1,33 @@
 <template>
-    <div id="integral-page">
-        <div class="top_bg">
-            <div class="first_div">
-                <p>当前积分余额</p>
-            </div>
-            <h1>{{integralNun}}</h1>
-            <button>充值积分</button>
-        </div>
-        <div class="record">
-            <div class="recordList">
-                <ul>
-                    <li
-                        v-for="(item,index) in recordList"
-                        :key="index"
-                    >
-                        <div class="recordlf">
-                            <img
-                                :src="item.src"
-                                alt=""
-                            >
-                            <div>
-                                <p>{{item.title}}</p>
-                                <p>{{item.operationTime}}</p>
-                            </div>
-                        </div>
-                        <div class="recordrt">
-                            <span v-if="item.type == 1">+{{item.operationMoney}}</span>
-                            <span v-else class="colorred">-{{item.operationMoney}}</span>
-                        </div>
-                        <div class="clear"></div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  <div id="integral-page">
+    <div class="top_bg">
+      <div class="first_div">
+        <p>当前积分余额</p>
+      </div>
+      <h1>{{ integralNun }}</h1>
+      <button>充值积分</button>
     </div>
+    <div class="record">
+      <div class="recordList">
+        <ul>
+          <li v-for="(item, index) in recordList" :key="index">
+            <div class="recordlf">
+              <img :src="item.src" alt="" />
+              <div>
+                <p>{{ item.title }}</p>
+                <p>{{ item.operationTime }}</p>
+              </div>
+            </div>
+            <div class="recordrt">
+              <span v-if="item.type == 1">+{{ item.operationMoney }}</span>
+              <span v-else class="colorred">-{{ item.operationMoney }}</span>
+            </div>
+            <div class="clear"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -48,21 +42,21 @@ export default {
           title: '首次注册奖励',
           operationTime: '2019-11-29  21:19:09',
           operationMoney: '6',
-          type:1
+          type: 1
         },
         {
           src: require('@/assets/images/jianjifen-icon.png'),
           title: '领取【饿了么红包】',
           operationTime: '2019-11-29  21:19:09',
           operationMoney: '1',
-          type:2
+          type: 2
         },
         {
           src: require('@/assets/images/jiajifen-icon.png'),
           title: '系统赠送',
           operationTime: '2019-11-29  21:19:09',
           operationMoney: '10',
-           type:1
+          type: 1
         }
       ]
     }
@@ -169,10 +163,10 @@ export default {
             line-height: 1;
             font-size: 3.7vw;
             font-weight: 500;
-            color:rgba(78,194,0,1);
+            color: rgba(78, 194, 0, 1);
             margin-top: 3vw;
-            &.colorred{
-                color:rgba(255,52,19,1);
+            &.colorred {
+              color: rgba(255, 52, 19, 1);
             }
           }
         }

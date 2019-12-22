@@ -1,23 +1,23 @@
 import service from './service'
-import qs from 'qs'
+import { Toast } from 'vant'
 
 function axios(config) {
   return new Promise((resolve, reject) => {
     service(config)
       .then(res => {
         if (res.status === 200) {
-          if (!res.data.status) {
-            this.$toast(res.data.msg)
+          if (res.data.code !== 200) {
+            Toast(res.data.msg)
             resolve(false)
           }
-          resolve(res.data)
+          resolve(res.data.data)
         } else {
-          this.$toast(res.data.message)
+          Toast(res.data.msg)
         }
       })
       .catch(error => {
-        reject(error.message)
-        this.$toast(error.message)
+        reject(error.msg)
+        Toast(error.msg)
       })
   })
 }
@@ -35,8 +35,8 @@ const request = {
     let config = {
       url,
       method: 'post',
-      data: qs.stringify(data),
-      headers: {'Content-Type': 'application/json;charset=UTF-8'}
+      data: data,
+      headers: { 'Content-Type': 'application/json;charset=UTF-8' }
     }
     return axios(config)
   },

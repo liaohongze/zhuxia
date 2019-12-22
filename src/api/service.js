@@ -1,17 +1,14 @@
 import axios from 'axios'
-import { apiDevelop } from '../utils/config'
-import { getToken } from '../utils/auth'
 
 // 请求的默认配置
 const service = axios.create({
-  timeout: 60 * 1000,
-  baseURL: apiDevelop
+  timeout: 60 * 1000
 })
 // 添加请求拦截器
 service.interceptors.request.use(
   res => {
     // 在发送请求之前做些什么
-    res.headers.common['access-token'] = getToken()
+    res.headers.common['Authorization'] = localStorage.getItem('token') || ''
     return res
   },
   error => {

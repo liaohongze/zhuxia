@@ -10,7 +10,6 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        // target: process.env.NODE_ENV === 'production' ? 'http://zh.tbshou.com' : 'http://wisdom_project.yxsoft.net',
         target: 'http://dev.yituoke.ac.cn',
         changeOrigin: true, // 是否跨域
         ws: true,

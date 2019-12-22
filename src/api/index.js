@@ -1,11 +1,11 @@
 import request from './request'
 import token from './modules/token'
+import user from './modules/user'
 
 // 导入api模块
-const apis = [...token]
+const apis = [...token, ...user]
 let api = {}
 // addPrefix(apis)
-
 
 // 执行下面的循环后，api形如：
 // {

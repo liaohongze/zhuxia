@@ -1,20 +1,36 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/getReceive">getReceive</router-link> |
-      <router-link to="/">About</router-link>
-    </div> -->
-    <router-view />
+    <router-view v-if="hadToken" />
   </div>
 </template>
+
 <script>
 export default {
   data() {
     return {
-      ddd: ''
+      hadToken: false
     }
   },
+
+  beforeMount() {
+    this.login()
+    this.getUserInfo()
+  },
+
   methods: {
+    async login() {
+      if (!localStorage.getItem('token')) {
+        const res = await this.$api.getToken({ code: this.$route.query.code })
+        localStorage.setItem('token', res.token)
+      }
+
+      this.hadToken = true
+    },
+
+    async getUserInfo() {
+      const res = await this.$api.getUserInfo()
+      console.log(res)
+    }
   }
 }
 </script>

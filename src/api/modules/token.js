@@ -1,7 +1,7 @@
-export default[
-{
-    name:'getToken',
+export default [
+  {
+    name: 'getToken',
     path: '/api/v1/token',
     method: 'post'
-}
+  }
 ]

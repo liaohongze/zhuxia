@@ -1,84 +1,80 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import getReceive from "../views/getReceive";
-import personal from "../views/Personal";
-import commission from "../views/Commission";
-import integral from "../views/Integral";
-import commissionRules from "../views/CommissionRules";
-import chongzhiIntegral from "../views/chongzhiIntegral";
-import RechargeRecord from "../views/RechargeRecord";
-import InvitationList from "../views/InvitationList";
-import WelfareCentre from "../views/WelfareCentre";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import home from '../views/home'
+import personal from '../views/Personal'
+import commission from '../views/Commission'
+import integral from '../views/Integral'
+import commissionRules from '../views/CommissionRules'
+import chongzhiIntegral from '../views/chongzhiIntegral'
+import RechargeRecord from '../views/RechargeRecord'
+import InvitationList from '../views/InvitationList'
+import WelfareCentre from '../views/WelfareCentre'
 
 Vue.use(VueRouter)
 
-const routes = [{
-    path: "/getReceive",
-    name: "getReceive",
-    meta: {
-    },
-    component: getReceive
+const routes = [
+  {
+    path: '/',
+    redirect: '/home'
   },
   {
-    path: "/personal",
-    name: "personal",
-    meta: {
-    },
+    path: '/home',
+    name: 'home',
+    meta: {},
+    component: home
+  },
+  {
+    path: '/personal',
+    name: 'personal',
+    meta: {},
     component: personal
   },
   {
-    path: "/commission",
-    name: "commission",
-    meta: {
-    },
+    path: '/commission',
+    name: 'commission',
+    meta: {},
     component: commission
   },
   {
-    path: "/integral",
-    name: "integral",
-    meta: {
-    },
+    path: '/integral',
+    name: 'integral',
+    meta: {},
     component: integral
   },
   {
-    path: "/commissionRules",
-    name: "commissionRules",
-    meta: {
-    },
+    path: '/commissionRules',
+    name: 'commissionRules',
+    meta: {},
     component: commissionRules
   },
   {
-    path: "/chongzhiIntegral",
-    name: "chongzhiIntegral",
-    meta: {
-    },
+    path: '/chongzhiIntegral',
+    name: 'chongzhiIntegral',
+    meta: {},
     component: chongzhiIntegral
   },
   {
-    path: "/RechargeRecord",
-    name: "RechargeRecord",
-    meta: {
-    },
+    path: '/RechargeRecord',
+    name: 'RechargeRecord',
+    meta: {},
     component: RechargeRecord
   },
   {
-    path: "/InvitationList",
-    name: "InvitationList",
-    meta: {
-    },
+    path: '/InvitationList',
+    name: 'InvitationList',
+    meta: {},
     component: InvitationList
   },
   {
-    path: "/WelfareCentre",
-    name: "WelfareCentre",
-    meta: {
-    },
+    path: '/WelfareCentre',
+    name: 'WelfareCentre',
+    meta: {},
     component: WelfareCentre
-  },
+  }
 ]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   routes
 })
 
@@ -86,16 +82,16 @@ const router = new VueRouter({
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
-    next();
+    next()
   } else {
-    let token = localStorage.getItem('Authorization');
- 
+    let token = localStorage.getItem('Authorization')
+
     if (token === 'null' || token === '') {
-      next('/login');
+      next('/login')
     } else {
-      next();
+      next()
     }
   }
-});
+})
 
 export default router

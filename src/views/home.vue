@@ -2,21 +2,10 @@
   <div id="getReceive1">
     <div class="top_bg">
       <div class="fixedtop">
-        <van-swipe
-          vertical
-          loop
-          :autoplay="3000"
-          stop-propagation
-        >
-          <van-swipe-item
-            v-for="(item,index) in lunboList"
-            :key="index"
-          >
-            <img
-              src="@/assets/images/wenzilunbo_icon.png"
-              alt=""
-            >
-            {{item.name}} {{item.time}}
+        <van-swipe vertical loop :autoplay="3000" stop-propagation>
+          <van-swipe-item v-for="(item, index) in lunboList" :key="index">
+            <img src="@/assets/images/wenzilunbo_icon.png" alt="" />
+            {{ item.name }} {{ item.time }}
           </van-swipe-item>
         </van-swipe>
       </div>
@@ -24,55 +13,34 @@
     </div>
     <div class="center_msg">
       <div class="userimg">
-        <img
-          src="@/assets/images/userimg.png"
-          alt=""
-        >
+        <img src="@/assets/images/userimg.png" alt="" />
       </div>
       <div class="username">
         <h3>想吃烧烤``</h3>
-        <img
-          src="@/assets/images/star-icon.png"
-          alt=""
-        >
-        <span>拥有积分:<b>200</b></span>
+        <img src="@/assets/images/star-icon.png" alt="" />
+        <span>
+          拥有积分:
+          <b>200</b>
+        </span>
       </div>
-      <a
-        class="jifenchongzhi"
-        href="#"
-      >
-        <img
-          src="@/assets/images/jifen_icon.png"
-          alt=""
-        >
+      <a class="jifenchongzhi" href="#">
+        <img src="@/assets/images/jifen_icon.png" alt="" />
         <span>积分充值</span>
       </a>
     </div>
     <div class="lunbo_content">
-      <van-swipe
-        :autoplay="3000"
-        indicator-color="white"
-      >
+      <van-swipe :autoplay="3000" indicator-color="white">
         <van-swipe-item>
-          <img
-            src="@/assets/images/lunbo1.png"
-            alt=""
-          >
+          <img src="@/assets/images/lunbo1.png" alt="" />
         </van-swipe-item>
         <van-swipe-item>
-          <img
-            src="@/assets/images/lunbo1.png"
-            alt=""
-          >
+          <img src="@/assets/images/lunbo1.png" alt="" />
         </van-swipe-item>
       </van-swipe>
     </div>
     <SelectType />
     <div class="floaticon">
-      <img
-        src="@/assets/images/suspension-icon.png"
-        alt="0元购"
-      >
+      <img src="@/assets/images/suspension-icon.png" alt="0元购" />
     </div>
     <BottomFixed />
   </div>
@@ -81,6 +49,7 @@
 <script>
 import BottomFixed from './BottomFixed'
 import SelectType from './SelectType'
+
 export default {
   components: { BottomFixed, SelectType },
   data() {
@@ -100,24 +69,6 @@ export default {
         }
       ]
     }
-  },
-  created() {
-    this.$axios.post('/api/v1/token',{
-        code:this.$Request.code
-    })
-    .then(res=>{
-      console.log(res,1)
-      // console.log(res.data.data.token)
-      localStorage.setItem('user_info',res.data.data.token)
-    })
-    .catch(err=>{
-       console.log(err)
-    })
-  },
-  mounted() {
-  },
-  methods: {
-   
   }
 }
 </script>
