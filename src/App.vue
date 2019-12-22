@@ -20,13 +20,13 @@ export default {
     initial() {
       if (
         !localStorage.getItem('token') ||
-        !localStorage.getItem('expireTime')
+        !localStorage.getItem('expiresAt')
       ) {
         this.noTokenProcess()
         return
       }
 
-      if (new Date().getTime() > localStorage.getItem('expireTime')) {
+      if (new Date().getTime() > localStorage.getItem('expiresAt')) {
         this.noTokenProcess()
       } else {
         this.defaultProcess()
@@ -37,7 +37,7 @@ export default {
       if (this.$route.query.code) {
         const res = await this.$api.getToken({ code: this.$route.query.code })
         localStorage.setItem('token', res.token)
-        localStorage.setItem('expireTime', res.expireTime)
+        localStorage.setItem('expiresAt', res.expiresAt)
         this.defaultProcess()
       } else {
         this.$toast('暂未开启微信验证，请手动填写code')

@@ -21,7 +21,7 @@ const routes = [
     path: '/home',
     name: 'home',
     meta: {
-     title: '领取饿了么红包'
+      title: '领取饿了么红包'
     },
     component: home
   },
