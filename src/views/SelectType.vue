@@ -165,7 +165,7 @@ export default {
         }
         p {
           height: 3.5vw;
-          line-height: 1;
+          line-height: 1.4;
           font-size: 3.7vw;
 
           font-weight: 400;
