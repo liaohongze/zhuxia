@@ -118,6 +118,7 @@ export default {
 .change_type {
   width: 90.2vw;
   // height: 93.6vw;
+  padding-bottom: 3vw;
   margin: 0 auto;
   background: rgba(233, 240, 245, 1);
   box-shadow: 0 0.5vw 1.5vw 0 rgba(4, 0, 0, 0.07);
