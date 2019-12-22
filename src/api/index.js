@@ -1,9 +1,9 @@
 import request from './request'
-import token from './modules/token'
+import base from './modules/base'
 import user from './modules/user'
 
 // 导入api模块
-const apis = [...token, ...user]
+const apis = [...base, ...user]
 let api = {}
 // addPrefix(apis)
 
