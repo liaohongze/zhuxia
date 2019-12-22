@@ -160,7 +160,7 @@ export default {
       .selectTop {
         overflow: hidden;
         h3 {
-          height: 4.3vw;
+          height: 4.5vw;
           line-height: 1;
           font-size: 4.4vw;
           font-weight: 600;
@@ -170,6 +170,7 @@ export default {
         span {
           float: right;
           height: 3.8vw;
+          line-height: 1;
           font-size: 3.9vw;
           font-weight: 500;
           color: rgba(243, 74, 0, 1);
