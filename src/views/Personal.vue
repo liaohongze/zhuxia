@@ -3,13 +3,13 @@
     <div class="top_bg">
       <div class="userimg">
         <img
-          src="@/assets/images/user-img1.png"
+          :src="userInfo.headimgurl"
           alt="0元购"
         >
       </div>
       <div class="username">
-        <h4>想吃烧烤~</h4>
-        <p id="userid">UID:198493875</p>
+        <h4>{{userInfo.nickname}}</h4>
+        <p id="userid">UID:{{userInfo.id}}</p>
       </div>
       <button
         class="tag-read"
@@ -20,7 +20,7 @@
     <div class="twomsg">
       <ul>
         <li>
-          <h3>12</h3>
+          <h3>{{userInfo.score}}</h3>
           <span>积分</span>
           <p>
             <img
@@ -31,14 +31,14 @@
           </p>
         </li>
         <li>
-          <h3>99</h3>
+          <h3>{{userInfo.cms}}</h3>
           <span>元</span>
           <p>
             <img
               src="@/assets/images/yongjin-icon.png"
               alt="0元购"
             >
-            <a href=""> 体现佣金></a>
+            <a href=""> 提现佣金></a>
           </p>
         </li>
       </ul>
@@ -129,6 +129,7 @@
 <script>
 import Clipboard from 'clipboard'
 import BottomFixed from './BottomFixed'
+import { mapGetters } from 'vuex'
 export default {
   components: { BottomFixed },
   data() {
@@ -164,7 +165,10 @@ export default {
         clipboard.destroy()
       })
     }
-  }
+  },
+   computed:{
+    ...mapGetters(['userInfo'])
+  },
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view v-if="hadToken" />
+    <router-view v-if="showView" />
   </div>
 </template>
 
@@ -8,13 +8,12 @@
 export default {
   data() {
     return {
-      hadToken: false
+      showView: false
     }
   },
 
   beforeMount() {
     this.login()
-    this.getUserInfo()
   },
 
   methods: {
@@ -24,12 +23,12 @@ export default {
         localStorage.setItem('token', res.token)
       }
 
-      this.hadToken = true
+      this.getUserInfo()
+      this.showView = true
     },
-
     async getUserInfo() {
       const res = await this.$api.getUserInfo()
-      console.log(res)
+      this.$store.commit('setUserInfo', res)
     }
   }
 }

@@ -13,14 +13,14 @@
     </div>
     <div class="center_msg">
       <div class="userimg">
-        <img src="@/assets/images/userimg.png" alt="" />
+        <img :src="userInfo.headimgurl" alt="" />
       </div>
       <div class="username">
-        <h3>想吃烧烤``</h3>
+        <h3>{{userInfo.nickname}}</h3>
         <img src="@/assets/images/star-icon.png" alt="" />
         <span>
           拥有积分:
-          <b>200</b>
+          <b>{{userInfo.score}}</b>
         </span>
       </div>
       <a class="jifenchongzhi" href="#">
@@ -49,6 +49,7 @@
 <script>
 import BottomFixed from './BottomFixed'
 import SelectType from './SelectType'
+import { mapGetters } from 'vuex'
 
 export default {
   components: { BottomFixed, SelectType },
@@ -69,7 +70,10 @@ export default {
         }
       ]
     }
-  }
+  },
+  computed:{
+    ...mapGetters(['userInfo'])
+  },
 }
 </script>
 

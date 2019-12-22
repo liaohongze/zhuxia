@@ -1,18 +1,18 @@
 <template>
     <div id="bottomFixed">
         <div class="bottomDiv">
-            <div :class="RouteName === 'getReceive' ? 'left changecolor' : 'left'">
+            <div :class="RouteName === 'home' ? 'left changecolor' : 'left'">
                 <img
                     src="@/assets/images/isHongbao.png"
                     alt="饿了么大红包"
                     @click="jumpUrl('getReceive')"
-                    v-show="RouteName === 'getReceive'"
+                    v-show="RouteName === 'home'"
                 >
                 <img
                     src="@/assets/images/isHongbaocolor.png"
                     alt="饿了么大红包"
-                    @click="jumpUrl('getReceive')"
-                     v-show="RouteName === 'getReceive' ? false : true"
+                    @click="jumpUrl('home')"
+                     v-show="RouteName === 'home' ? false : true"
                 >
                 <p>饿了么大红包</p>
             </div>
