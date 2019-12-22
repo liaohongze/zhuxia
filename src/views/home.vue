@@ -68,7 +68,7 @@ export default {
           name: '蔡**凤',
           time: '在10秒前领取5元红包'
         }
-      ]
+      ],
     }
   },
   computed:{

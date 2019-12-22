@@ -43,12 +43,12 @@
         </li>
       </ul>
     </div>
-    <div class="hengfu">
+    <div class="hengfu" @click="openTc">
       <p>邀请好友加入~赠12积分，赚20%佣金</p>
     </div>
     <div class="datalist">
       <ul>
-        <a href="">
+        <router-link to="./chongzhiIntegral">
           <li>
             <img
               src="@/assets/images/jifen_img.png"
@@ -56,8 +56,8 @@
             >
             <p>积分充值</p>
           </li>
-        </a>
-        <a href="">
+         </router-link>
+       <router-link to="./chongzhiIntegral">
           <li>
             <img
               src="@/assets/images/haoyou_img.png"
@@ -65,7 +65,7 @@
             >
             <p>好友列表</p>
           </li>
-        </a>
+       </router-link>
         <a href="">
           <li>
             <img
@@ -139,7 +139,6 @@ export default {
     }
   },
   mounted() {
-    this.show = true
     // this.$dialog
     //   .alert({
     //     title: '标题',
@@ -164,6 +163,9 @@ export default {
         this.$toast('复制出错啦,请再试一遍!')
         clipboard.destroy()
       })
+    },
+    openTc(){
+      this.show = true
     }
   },
    computed:{
