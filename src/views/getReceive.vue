@@ -111,7 +111,8 @@ export default {
       localStorage.setItem('user_info',res.data.data.token)
     })
     .catch(err=>{
-       console.log(err)
+      console.log(err)
+       this.$toast(err.code)
     })
   },
   mounted() {
