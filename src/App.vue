@@ -18,7 +18,10 @@ export default {
 
   methods: {
     initial() {
-      if (!localStorage.getItem('token')) {
+      if (
+        !localStorage.getItem('token') ||
+        !localStorage.getItem('expireTime')
+      ) {
         this.noTokenProcess()
         return
       }
@@ -26,8 +29,7 @@ export default {
       if (new Date().getTime() > localStorage.getItem('expireTime')) {
         this.noTokenProcess()
       } else {
-        this.getUserInfo()
-        this.showView = true
+        this.defaultProcess()
       }
     },
 
@@ -35,8 +37,10 @@ export default {
       if (this.$route.query.code) {
         const res = await this.$api.getToken({ code: this.$route.query.code })
         localStorage.setItem('token', res.token)
+        localStorage.setItem('expireTime', res.expireTime)
+        this.defaultProcess()
       } else {
-        console.log('暂未开启微信验证，请手动填写code')
+        this.$toast('暂未开启微信验证，请手动填写code')
       }
       // 微信验证，测试环境先关闭
       //  else {
@@ -45,6 +49,11 @@ export default {
       //   let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${platform.appid}&redirect_uri=${redirectUri}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`
       //   location.href = url
       // }
+    },
+
+    defaultProcess() {
+      this.getUserInfo()
+      this.showView = true
     },
 
     async getUserInfo() {

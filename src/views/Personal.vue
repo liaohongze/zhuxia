@@ -44,7 +44,7 @@
       </ul>
     </div>
     <div class="hengfu" @click="openTc">
-      <p>邀请好友加入~赠12积分，赚20%佣金</p>
+      <p>{{platform.announcements[0].title}}</p>
     </div>
     <div class="datalist">
       <ul>
@@ -114,9 +114,7 @@
               src="@/assets/images/close-btn.png"
               alt="福利中心"
             >
-            <p>活动期间,邀请好发可得好友充值金额的20% (直接下线)
-              10(间接下线)提成(活动解释权归活动方所有)
-              详情情查看返佣规则赶紧</p>
+            <p v-html="platform.announcements[0].content"></p>
             <button>我知道了</button>
           </div>
         </div>
@@ -135,7 +133,8 @@ export default {
   data() {
     return {
       userId: '198493875',
-      show: false
+      show: false,
+      platform :JSON.parse(localStorage.getItem('platform'))
     }
   },
   mounted() {

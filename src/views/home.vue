@@ -40,7 +40,9 @@
     </div>
     <SelectType />
     <div class="floaticon">
-      <img src="@/assets/images/suspension-icon.png" alt="0元购" />
+      <a :href='platform.floatWindow.url'>
+          <img :src="platform.floatWindow.img" alt="0元购" />
+      </a>
     </div>
     <BottomFixed />
   </div>
@@ -57,18 +59,27 @@ export default {
     return {
       lunboList: [
         {
-          name: '蔡**凤',
-          time: '在10秒前领取5元红包'
+          name: '🍍',
+          time: '在5分钟前领取5元红包'
+        },
+        {
+          name: '我是小**~🌱',
+          time: '在32秒前领取4元红包'
         },
         {
           name: '蔡**凤',
           time: '在10秒前领取5元红包'
         },
         {
-          name: '蔡**凤',
+          name: '随风而**遇。',
           time: '在10秒前领取5元红包'
-        }
+        },
+        {
+          name: '随风而**遇。',
+          time: '在17分钟前领取6元红包'
+        },
       ],
+      platform :JSON.parse(localStorage.getItem('platform'))
     }
   },
   computed:{

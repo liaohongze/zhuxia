@@ -10,7 +10,7 @@ import 'vant/lib/index.css'
 
 async function initail() {
   const res = await api.getPlatformInfo()
-  localStorage.setItem('token', res)
+  localStorage.setItem('platform', JSON.stringify(res))
 
   new Vue({
     router,
