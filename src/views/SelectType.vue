@@ -129,7 +129,6 @@ export default {
     li {
       margin: 0 auto;
       width: 81.1vw;
-      height: 13vw;
       background: rgba(255, 255, 255, 1);
       border-radius: 1.3vw;
       margin-bottom: 1.9vw;
@@ -156,7 +155,6 @@ export default {
       }
       &.isSelect {
         width: 81.1vw;
-        height: 24.1vw;
         background: rgba(243, 248, 255, 1);
         border: 0.2vw solid rgba(41, 89, 255, 1);
         box-shadow: 0 0.6vw 2.2vw 0 rgba(23, 110, 200, 0.27);
@@ -165,13 +163,11 @@ export default {
           color: rgba(41, 89, 255, 1);
         }
         p {
-          height: 3.5vw;
           line-height: 1.4;
           font-size: 3.7vw;
-
           font-weight: 400;
           color: rgba(84, 84, 84, 1);
-          margin: 2.5vw 0;
+          margin: 2.5vw 0 0;
           text-align: left;
           &:last-of-type {
             margin: 0;
