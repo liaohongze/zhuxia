@@ -30,11 +30,10 @@
     </div>
     <div class="lunbo_content">
       <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item>
-          <img src="@/assets/images/lunbo1.png" alt="" />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="@/assets/images/lunbo1.png" alt="" />
+        <van-swipe-item v-for="(item,index) in platform.banners" :key="index">
+          <a :href="item.url">
+            <img :src="item.img" alt="" />
+          </a>
         </van-swipe-item>
       </van-swipe>
     </div>

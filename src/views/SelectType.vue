@@ -249,7 +249,7 @@ export default {
 <style lang="less">
 #homegetRulesstyle {
   p {
-    line-height: 1;
+    line-height: 1.5;
     font-size: 3.3vw;
     font-weight: 400;
     color: rgba(83, 83, 83, 1);

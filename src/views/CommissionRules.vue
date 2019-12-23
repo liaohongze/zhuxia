@@ -21,14 +21,14 @@
                 </li>
                 <li>
                     <h4>④联系客服</h4>
-                    <p> 如还有未详尽问题你还可以联系我们客服小姐姐，微信号：hmf__92</p>
+                    <p> 如还有未详尽问题你还可以联系我们客服小姐姐，微信号：{{platform.kfWechat}}</p>
                 </li>
 
             </ul>
         </div>
         <div class="erweima">
             <img
-                src="@/assets/images/erweima.png"
+                :src="platform.kfImg"
                 alt=""
             >
             <p>长按图片识别二维码</p>
@@ -40,7 +40,9 @@
 export default {
   components: {},
   data() {
-    return {}
+    return {
+      platform: JSON.parse(localStorage.getItem('platform'))
+    }
   },
   mounted() {},
   methods: {}
