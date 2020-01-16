@@ -3,13 +3,13 @@
         <div class="top_bg">
             <div class="userimg">
                 <img
-                    src="@/assets/images/userimg.png"
+                    :src="userInfo.headimgurl"
                     alt="0元购"
                 >
             </div>
             <div class="username">
-                <h4>想吃烧烤~</h4>
-                <p>积分：{{integralNum}}</p>
+                <h4>{{userInfo.nickname}}</h4>
+                <p>积分：{{userInfo.score}}</p>
             </div>
             <router-link to="./RechargeRecord">
             <div class="chongzhirecord">
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   components: {},
   data() {
@@ -104,7 +105,10 @@ export default {
       //       console.log(122222)
       //     })
     }
-  }
+  },
+   computed:{
+    ...mapGetters(['userInfo'])
+  },
 }
 </script>
 

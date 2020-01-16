@@ -29,7 +29,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### 页面名称:
 BottomFixed : 底部菜单栏页面
 Commission : 查看佣金页面
-getReceive : 领取饿了么红包页面
 Integral : 积分明细页面
 Personal : 个人中心页面
 CommissionRules : 佣金规则页面

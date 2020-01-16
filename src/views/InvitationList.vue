@@ -3,13 +3,13 @@
     <div class="top_bg">
       <div class="userimg">
         <img
-          src="@/assets/images/user-img1.png"
-          alt="0元购"
+          :src="userInfo.headimgurl"
+          alt=""
         >
       </div>
       <div class="username">
-        <h4>想吃烧烤~</h4>
-        <p id="userid">UID:198493875</p>
+        <h4>{{userInfo.nickname}}</h4>
+        <p id="userid">UID:{{userInfo.id}}</p>
       </div>
     </div>
     <div class="henglan_title">
@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   components: {},
   data() {
@@ -131,7 +132,10 @@ export default {
     closePopup() {
       this.show = false
     }
-  }
+  },
+   computed:{
+    ...mapGetters(['userInfo'])
+  },
 }
 </script>
 

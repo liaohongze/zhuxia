@@ -9,7 +9,7 @@
                     </div>
                 </router-link>
             </div>
-            <h1>{{ketixianyongjin}}</h1>
+            <h1>{{userInfo.cms}}</h1>
             <button>点击提现</button>
         </div>
         <div class="twoMsg">
@@ -68,7 +68,7 @@
             <div class="process_title">
                 <div class="shuxian"></div><span>佣金记录</span>
             </div>
-            <div class="recordList">
+            <div class="recordList" >
                 <ul>
                     <li
                         v-for="(item,index) in recordList"
@@ -76,16 +76,16 @@
                     >
                         <div class="recordlf">
                             <img
-                                :src="item.src"
+                                :src="item.headimgurl"
                                 alt=""
                             >
                             <div>
-                                <p>{{item.username}}</p>
-                                <p>{{item.withdrawalTime}}</p>
+                                <p>{{item.nickname}}</p>
+                                <p>{{timestampToTime(item.createdAt * 1000)}}</p>
                             </div>
                         </div>
                         <div class="recordrt">
-                            <span>+{{item.withdrawalMoney}}元</span>
+                            <span>+{{item.cms}}元</span>
                         </div>
                         <div class="clear"></div>
                     </li>
@@ -96,6 +96,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import {timestampToTime} from '../assets/untils/index'
 export default {
   components: {},
   data() {
@@ -103,33 +105,58 @@ export default {
       ketixianyongjin: 66.66,
       leijiyongjin: 88.88,
       leijituiguangrenshu: 9999,
-      recordList: [
-        {
-          src: require('@/assets/images/user_small_1.png'),
-          username: '想吃烧烤',
-          withdrawalTime: '2019-11-29  21:19:09',
-          withdrawalMoney: '0.1'
-        },
-        {
-          src: require('@/assets/images/user_small_2.png'),
-          username: '想吃火锅',
-          withdrawalTime: '2019-11-29  21:19:09',
-          withdrawalMoney: '1'
-        },
-        {
-          src: require('@/assets/images/user_small_3.png'),
-          username: '想看电影',
-          withdrawalTime: '2019-11-29  21:19:09',
-          withdrawalMoney: '0.1'
-        }
-      ]
+      recordList: [],
+      loading:true,
+      isScroll:true,
+      loadingMore: false,//loading加载更多
+      page:1,
+      limit:8
     }
   },
-  mounted() {},
+  mounted() {
+    document.addEventListener('scroll', this.scrollMoreData, false)
+    this.getRecords()
+  },
   methods: {
     jumpUrl(e) {
       this.$router.push({ path: '/' + e })
-    }
+    },
+    async getRecords(){
+      const res = await this.$api.Records({page:this.page,limit:this.limit})
+      this.recordList = res.list
+      this.leijiyongjin = res.totalCms
+      this.leijituiguangrenshu = res.totalInviteNum
+    },
+
+    async scrollMoreData() {
+         const scrollTopHeight = document.documentElement.scrollTop || document.body.scrollTop //滚动高度
+         const clientHeight = document.documentElement.clientHeight || window.screen.availHeight //屏幕可用工作区高度
+         const offsetHeight = document.documentElement.offsetHeight || document.body.offsetHeight //网页可见区域高(包括边线的宽)
+         if ((scrollTopHeight + clientHeight) + 50 >= offsetHeight && this.isScroll) {
+             this.isScroll = false
+             this.loadingMore = true
+             this.page += 1
+             const res = await this.$api.Records({page:this.page,limit:this.limit})
+             if(res.list){
+                this.loadingMore = false
+                this.recordList = this.recordList.concat(res.list)
+                 this.isScroll = true
+             }else{
+                this.isScroll = false
+               this.$toast('没有更多记录了!')
+             }
+            }
+         },
+    // // 时间戳转换成时间
+      timestampToTime (time) {
+       return timestampToTime(time)
+    },
+  },
+   computed:{
+    ...mapGetters(['userInfo'])
+  },
+  destroyed () {
+    document.removeEventListener('scroll', this.scrollMoreData, false)
   }
 }
 </script>

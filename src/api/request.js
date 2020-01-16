@@ -6,13 +6,13 @@ function axios(config) {
     service(config)
       .then(res => {
         if (res.status === 200) {
-          if (res.data.code !== 200) {
-            Toast(res.data.msg)
-            resolve(false)
-          }
-          resolve(res.data.data)
+          // if (res.data.code !== 200) {
+          //   Toast(res.data.msg)
+          //   resolve(false)
+          // }
+          resolve(res.data)
         } else {
-          Toast(res.data.msg)
+          Toast(res.msg)
         }
       })
       .catch(error => {

@@ -19,8 +19,8 @@ export default {
   methods: {
     initial() {
       if (
-        !localStorage.getItem('token') ||
-        !localStorage.getItem('expiresAt')
+        localStorage.getItem('token') == 'undefined' ||
+        localStorage.getItem('expiresAt') == 'undefined'
       ) {
         this.noTokenProcess()
         return
@@ -35,7 +35,9 @@ export default {
 
     async noTokenProcess() {
       if (this.$route.query.code) {
-        const res = await this.$api.getToken({ code: this.$route.query.code })
+        const res = await this.$api.getToken({
+          code: this.$route.query.code
+        })
         localStorage.setItem('token', res.token)
         localStorage.setItem('expiresAt', res.expiresAt)
         this.defaultProcess()

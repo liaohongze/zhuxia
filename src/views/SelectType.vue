@@ -7,7 +7,7 @@
       <ul>
         <li
           :class="{'isSelect': currentSort === index}"
-          v-for="(item,index) in getReceiveType"
+          v-for="(item,index) in ReceiveType"
           :key="index"
           @click="changeBg(index)"
         >
@@ -40,7 +40,7 @@
       <h4>领取规则</h4>
       <div
         class="getrules"
-        v-for="(item,index) in getReceiveType"
+        v-for="(item,index) in ReceiveType"
         :key="index"
       >
         <div
@@ -52,7 +52,7 @@
       <!-- <p>asddddd</p> -->
     </div>
     <!-- <van-cell is-link @click="showPopup">展示弹出层</van-cell> -->
-
+    <!-- <van-loading color="#1989fa" /> -->
     <van-popup v-model="show">很抱歉，领取失败，错误结果很抱歉，领取失败，错误结果</van-popup>
   </div>
 </template>
@@ -62,12 +62,15 @@ export default {
   data() {
     return {
       show: false,
-      getReceiveType: JSON.parse(localStorage.getItem('platform')).redpacks,
+      ReceiveType: [],
       currentSort: 0,
+      id:'',
       inputPhoneValue: ''
     }
   },
-  mounted() {},
+  mounted() {
+      this.Redpacks()
+  },
   methods: {
     changeBg(i) {
       this.currentSort = i
@@ -83,6 +86,7 @@ export default {
       }
       if (reg.test(inputValue)) {
         // 号码验证成功
+        this.getRedpacks()
         this.$toast.loading({
           message: '加载中...',
           forbidClick: true
@@ -93,7 +97,16 @@ export default {
         this.$toast('手机号码格式不正确')
         return false
       }
-    }
+    },
+    async Redpacks(){
+      const res = await this.$api.redPacks({})
+      this.id = res[0].id
+      this.ReceiveType = res
+    },
+      async getRedpacks(){
+      const res = await this.$api.redPacks({id:this.id,mobile:this.inputPhoneValue})
+      console.log(res)
+    },
   }
 }
 </script>

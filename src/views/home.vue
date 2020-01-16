@@ -30,7 +30,7 @@
     </div>
     <div class="lunbo_content">
       <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item,index) in platform.banners" :key="index">
+        <van-swipe-item v-for="(item,index) in banners" :key="index">
           <a :href="item.url">
             <img :src="item.img" alt="" />
           </a>
@@ -78,12 +78,23 @@ export default {
           time: '在17分钟前领取6元红包'
         },
       ],
-      platform :JSON.parse(localStorage.getItem('platform'))
+      platform :JSON.parse(localStorage.getItem('platform')),
+      banners:[]
     }
   },
   computed:{
     ...mapGetters(['userInfo'])
   },
+  mounted () {
+  this.getBanners()
+  },
+  methods: {
+   async getBanners(){
+     const res = await this.$api.Banners({})
+     this.banners = res
+     console.log(res)
+    }
+  }
 }
 </script>
 
@@ -212,7 +223,7 @@ export default {
   }
 }
 .lunbo_content {
-  height: 33.3vw;
+  // height: 33.3vw;
   width: 90.2vw;
   margin: 3vw auto 0;
   border-radius: 0.9vw;

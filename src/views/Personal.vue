@@ -43,8 +43,12 @@
         </li>
       </ul>
     </div>
-    <div class="hengfu" @click="openTc">
-      <p>{{platform.announcements[0].title}}</p>
+    <div class="hengfu" >
+      <van-swipe vertical loop :autoplay="3000">
+          <van-swipe-item @click="openTc(index)" v-for="(item, index) in Announcements" :key="index">
+              <p>{{item.title}}</p>
+          </van-swipe-item>
+        </van-swipe>
     </div>
     <div class="datalist">
       <ul>
@@ -114,7 +118,7 @@
               src="@/assets/images/close-btn.png"
               alt="福利中心"
             >
-            <p v-html="platform.announcements[0].content"></p>
+            <p v-html="Announcements[theIndex].content"></p>
             <button>我知道了</button>
           </div>
         </div>
@@ -134,10 +138,13 @@ export default {
     return {
       userId: '198493875',
       show: false,
-      platform :JSON.parse(localStorage.getItem('platform'))
+      Announcements:[],
+      theIndex:0
+      // platform :JSON.parse(localStorage.getItem('platform'))
     }
   },
   mounted() {
+    this.getAnnouncements()
     // this.$dialog
     //   .alert({
     //     title: '标题',
@@ -163,8 +170,14 @@ export default {
         clipboard.destroy()
       })
     },
-    openTc(){
+    openTc(i){
       this.show = true
+      this.theIndex = i
+    },
+    async getAnnouncements(){
+      const res = await this.$api.Announcements({})
+      this.Announcements = res
+      console.log(res)
     }
   },
    computed:{
@@ -305,6 +318,16 @@ export default {
   border-radius: 1.3vw;
   margin-top: 2vw;
   line-height: 10.2vw;
+      .van-swipe {
+      height: 10.2vw;
+      .van-swipe-item {
+        font-size: 3.3vw;
+        font-weight: 400;
+         height: 10.2vw;
+        line-height: 10.2vw;
+      }
+    }
+   
   p {
     height: 3.9vw;
     font-size: 3.7vw;
@@ -373,10 +396,10 @@ export default {
 
 .block {
   width: 69.8vw;
-  height: 48.5vw;
+  // height: 48.5vw;
   background: rgba(255, 255, 255, 1);
   border-radius: 1.1vw;
-  padding: 3vw 4.85vw 0;
+  padding: 3vw 4.85vw 5vw;
   position: relative;
   img {
     position: absolute;
@@ -411,5 +434,9 @@ export default {
     margin-top: 2.5vw;
   }
 }
+/deep/
+ .van-swipe__indicators--vertical{
+      display: none!important;
+  }
 </style>
 
