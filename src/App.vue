@@ -26,11 +26,15 @@ export default {
         return
       }
 
-      if (new Date().getTime() > localStorage.getItem('expiresAt')) {
-        this.noTokenProcess()
-      } else {
-        this.defaultProcess()
-      }
+      this.defaultProcess()
+
+      // if (new Date().getTime() > localStorage.getItem('expiresAt')) {
+      //   console.log('2')
+      //   this.noTokenProcess()
+      // } else {
+      //   console.log('3')
+      //   this.defaultProcess()
+      // }
     },
 
     async noTokenProcess() {

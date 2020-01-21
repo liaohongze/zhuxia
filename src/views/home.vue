@@ -16,11 +16,11 @@
         <img :src="userInfo.headimgurl" alt="" />
       </div>
       <div class="username">
-        <h3>{{userInfo.nickname}}</h3>
+        <h3>{{ userInfo.nickname }}</h3>
         <img src="@/assets/images/star-icon.png" alt="" />
         <span>
           拥有积分:
-          <b>{{userInfo.score}}</b>
+          <b>{{ userInfo.score }}</b>
         </span>
       </div>
       <a class="jifenchongzhi" href="#">
@@ -30,7 +30,7 @@
     </div>
     <div class="lunbo_content">
       <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item,index) in banners" :key="index">
+        <van-swipe-item v-for="(item, index) in banners" :key="index">
           <a :href="item.url">
             <img :src="item.img" alt="" />
           </a>
@@ -39,8 +39,8 @@
     </div>
     <SelectType />
     <div class="floaticon">
-      <a :href='platform.floatWindow.url'>
-          <img :src="platform.floatWindow.img" alt="0元购" />
+      <a :href="platform.floatWindow.url">
+        <img :src="platform.floatWindow.img" alt="0元购" />
       </a>
     </div>
     <BottomFixed />
@@ -76,23 +76,24 @@ export default {
         {
           name: '随风而**遇。',
           time: '在17分钟前领取6元红包'
-        },
+        }
       ],
-      platform :JSON.parse(localStorage.getItem('platform')),
-      banners:[]
+      platform: JSON.parse(localStorage.getItem('platform')),
+      banners: []
     }
   },
-  computed:{
+
+  computed: {
     ...mapGetters(['userInfo'])
   },
-  mounted () {
-  this.getBanners()
+
+  mounted() {
+    this.getBanners()
   },
+
   methods: {
-   async getBanners(){
-     const res = await this.$api.Banners({})
-     this.banners = res
-     console.log(res)
+    async getBanners() {
+      this.banners = await this.$api.Banners({})
     }
   }
 }

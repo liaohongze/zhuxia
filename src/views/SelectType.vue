@@ -6,43 +6,49 @@
     <div class="change_type">
       <ul>
         <li
-          :class="{'isSelect': currentSort === index}"
-          v-for="(item,index) in ReceiveType"
+          :class="{ isSelect: currentSort === index }"
+          v-for="(item, index) in ReceiveType"
           :key="index"
           @click="changeBg(index)"
         >
           <div class="selectTop">
-            <h3>{{item.title}}</h3>
-            <span>{{item.score}}积分/次</span>
+            <h3>{{ item.title }}</h3>
+            <span>{{ item.score }}积分/次</span>
           </div>
-          <div
-            class="selectBottom"
-            v-if="currentSort === index"
-          >
-            <p>{{item.description}}</p>
-            <p>{{item.describe2}}</p>
+          <div class="selectBottom" v-if="currentSort === index">
+            <p>{{ item.description }}</p>
+            <p>{{ item.describe2 }}</p>
           </div>
         </li>
       </ul>
     </div>
     <div class="phoneInput">
       <h3>请输入饿了么手机号</h3>
-      <input
-        type="text"
-        placeholder="11位手机号"
-        maxlength="11"
-        v-model="inputPhoneValue"
-      >
-      <button
-        type="submit"
-        @click="onSubmit()"
-      >马上领取饿了么大红包</button>
+      <div class="input-box">
+        <input
+          type="tel"
+          placeholder="11位手机号"
+          maxlength="11"
+          v-model="inputPhoneValue"
+          @input="mobileInput"
+        />
+      </div>
+      <div class="input-box" v-if="showSmsBox">
+        <input
+          type="number"
+          placeholder="短信验证码"
+          maxlength="6"
+          v-model="smsCode"
+        />
+        <button class="btn btn-send-code" @click="getSmsCode">
+          获取验证码
+        </button>
+      </div>
+      <button type="button" @click="onSubmit" :disabled="!canSubmit">
+        马上领取饿了么大红包
+      </button>
       <h4>领取规则</h4>
-      <div
-        class="getrules"
-        v-for="(item,index) in ReceiveType"
-        :key="index"
-      >
+      <div class="getrules" v-for="(item, index) in ReceiveType" :key="index">
         <div
           id="homegetRulesstyle"
           v-html="item.rule"
@@ -53,60 +59,210 @@
     </div>
     <!-- <van-cell is-link @click="showPopup">展示弹出层</van-cell> -->
     <!-- <van-loading color="#1989fa" /> -->
-    <van-popup v-model="show">很抱歉，领取失败，错误结果很抱歉，领取失败，错误结果</van-popup>
+    <van-popup v-model="showFail">
+      <div class="mb-10">
+        <van-icon name="close" size="40" color="#f56c6c" />
+      </div>
+      很抱歉，领取失败!
+    </van-popup>
+    <van-popup v-model="showSueccess">
+      <div class="mb-10">
+        <van-icon name="passed" size="40" color="#07c160" />
+      </div>
+      恭喜您，领取成功!
+    </van-popup>
+
+    <van-overlay :show="showImgCodeBox">
+      <div class="wrapper" @click.stop>
+        <div class="block">
+          <div class="input-box">
+            <input
+              type="text"
+              maxlength="4"
+              v-model="captchaCode"
+              placeholder="请输入图形验证码"
+            />
+            <img :src="codeImg" alt="图形验证码" @click="getImgCode" />
+          </div>
+
+          <button type="button" class="btn" @click="sendSms">确定</button>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
-      show: false,
+      showFail: false,
+      showSueccess: false,
       ReceiveType: [],
       currentSort: 0,
-      id:'',
-      inputPhoneValue: ''
+      id: '',
+      inputPhoneValue: '',
+      canSubmit: false,
+
+      showSmsBox: false,
+      smsCode: '',
+      showImgCodeBox: false,
+      codeImg: '',
+      captchaCode: '', // 字段名是后端定义的
+      captchaHash: '',
+      validateToken: ''
     }
   },
-  mounted() {
-      this.Redpacks()
+
+  computed: {
+    ...mapGetters(['userInfo'])
   },
+
+  mounted() {
+    this.Redpacks()
+    this.checkUserMobile()
+  },
+
   methods: {
     changeBg(i) {
       this.currentSort = i
     },
-    onSubmit() {
-      var inputValue = this.inputPhoneValue
-      var currentSort = this.currentSort //选择的哪个红包
-      let reg = /^1[3|4|5|7|8][0-9]{9}$/
-      console.log(inputValue, currentSort)
-      if (!inputValue) {
-        this.$toast('手机号码不能为空!')
+
+    async onSubmit() {
+      if (!this.smsCode) {
+        this.$toast('请输入短信验证码!')
         return false
       }
-      if (reg.test(inputValue)) {
-        // 号码验证成功
-        this.getRedpacks()
-        this.$toast.loading({
-          message: '加载中...',
-          forbidClick: true
-        })
-        this.show = true //弹窗
+      const {
+        inputPhoneValue,
+        smsCode,
+        validateToken,
+        currentSort,
+        ReceiveType
+      } = this
+
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true
+      })
+
+      const loginRes = await this.$api.loginBySms({
+        mobile: inputPhoneValue,
+        smsCode,
+        validateToken
+      })
+
+      if (loginRes != 'ok') return
+
+      const res = await this.$api.getredPacks({
+        id: ReceiveType[currentSort].id,
+        mobile: inputPhoneValue
+      })
+
+      console.log(res)
+
+      if (res.code === 0) {
+        this.showFail = true
       } else {
-        //   号码验证失败
-        this.$toast('手机号码格式不正确')
-        return false
+        this.showSueccess = true
       }
     },
-    async Redpacks(){
+
+    async Redpacks() {
       const res = await this.$api.redPacks({})
       this.id = res[0].id
       this.ReceiveType = res
     },
-      async getRedpacks(){
-      const res = await this.$api.redPacks({id:this.id,mobile:this.inputPhoneValue})
+
+    async getRedpacks() {
+      const res = await this.$api.redPacks({
+        id: this.id,
+        mobile: this.inputPhoneValue
+      })
       console.log(res)
     },
+
+    async checkUserMobile() {
+      const mobile = this.userInfo.mobile
+      if (mobile) {
+        this.inputPhoneValue = mobile
+        const isLogin = await this.getUserCurrent(mobile)
+
+        if (isLogin) {
+          this.canSubmit = true
+        } else {
+          this.showSmsBox = true
+        }
+      } else {
+        this.showSmsBox = true
+      }
+    },
+
+    getUserCurrent(mobile) {
+      return new Promise(async resolve => {
+        const { isLogin } = await this.$api.getUserCurrent({
+          mobile
+        })
+
+        resolve(isLogin)
+      })
+    },
+
+    async mobileInput() {
+      let reg = /^1[3|4|5|7|8|9][0-9]{9}$/
+      if (reg.test(this.inputPhoneValue)) {
+        const isLogin = await this.getUserCurrent(this.inputPhoneValue)
+        if (isLogin) {
+          this.canSubmit = true
+        } else {
+          this.showSmsBox = true
+        }
+      }
+    },
+
+    getSmsCode() {
+      let reg = /^1[3|4|5|7|8|9][0-9]{9}$/
+      if (!reg.test(this.inputPhoneValue)) {
+        this.$toast('请输入正确的手机号码!')
+        return
+      }
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true
+      })
+      this.getImgCode(() => {
+        this.$nextTick(() => {
+          this.$toast.clear()
+          this.showImgCodeBox = true
+        })
+      })
+    },
+
+    async getImgCode(cb) {
+      const { captchaHash, captchaImage } = await this.$api.getCaptcha({
+        mobile: this.inputPhoneValue
+      })
+      this.captchaHash = captchaHash
+      this.codeImg = 'data:image/jpg;base64,' + captchaImage
+
+      cb && cb()
+    },
+
+    async sendSms() {
+      const { inputPhoneValue, captchaHash, captchaCode } = this
+      const res = await this.$api.sendSms({
+        mobile: inputPhoneValue,
+        captchaHash,
+        captchaCode
+      })
+
+      this.$toast('短信验证码发送成功！请注意查收')
+      this.canSubmit = true
+      this.validateToken = res.validateToken
+      this.showImgCodeBox = false
+    }
   }
 }
 </script>
@@ -195,7 +351,7 @@ export default {
   background: rgba(255, 255, 255, 1);
   border-radius: 1.3vw;
   margin: 0 auto;
-  padding: 5.3vw 0 7vw 4.8vw;
+  padding: 5.3vw 7vw 4.8vw;
   text-align: left;
   margin-bottom: 15vw;
   h3 {
@@ -215,11 +371,9 @@ export default {
     padding-left: 2.6vw;
     font-size: 3.5vw;
     font-weight: 400;
-    color: rgba(167, 167, 167, 1);
-    margin-bottom: 5.6vw;
   }
-  button {
-    width: 79.4vw;
+  > button {
+    width: 100%;
     height: 11.1vw;
     background: linear-gradient(
       267deg,
@@ -241,21 +395,79 @@ export default {
     line-height: 1;
   }
 }
+
+.input-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4vw 0;
+  background: #f7f8fa;
+  border-radius: 4px;
+}
+
+.btn {
+  flex-shrink: 0;
+  width: max-content;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 4px;
+  background: linear-gradient(267deg, #2955ff 0%, #2786ff 100%);
+
+  &.btn-send-code {
+    height: 10vw;
+    padding: 2vw 4vw;
+    font-size: 2vw;
+  }
+}
+
 /deep/ .van-popup {
   width: 60.6vw;
-  height: 18.7vw;
+  padding: 4vw 6.4vw;
+  font-size: 3.6vw;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 5vw;
+  text-align: cetner;
   background: linear-gradient(
     88deg,
     rgba(41, 87, 255, 1),
     rgba(39, 134, 255, 1)
   );
-  border-radius: 9.4vw;
-  font-size: 3.6vw;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
-  line-height: 5vw;
-  text-align: left;
-  padding: 4.6vw 6.4vw 0;
+  border-radius: 6px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block {
+  // display: flex;
+  // align-items: center;
+  width: 80%;
+  padding: 4vw;
+  background-color: #fff;
+  border-radius: 6px;
+
+  input {
+    flex: 1;
+    padding: 2vw 0 2vw 4vw;
+    background: rgba(242, 242, 242, 1);
+  }
+
+  img {
+    width: 20vw;
+    height: 9vw;
+  }
+
+  button {
+    width: 100%;
+    padding: 2.5vw;
+    margin-top: 1vw;
+    margin-bottom: 2vw;
+  }
 }
 </style>
 

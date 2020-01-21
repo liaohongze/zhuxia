@@ -2,22 +2,17 @@ import service from './service'
 import { Toast } from 'vant'
 
 function axios(config) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     service(config)
       .then(res => {
         if (res.status === 200) {
-          // if (res.data.code !== 200) {
-          //   Toast(res.data.msg)
-          //   resolve(false)
-          // }
           resolve(res.data)
         } else {
           Toast(res.msg)
         }
       })
       .catch(error => {
-        reject(error.msg)
-        Toast(error.msg)
+        Toast(error.data.msg)
       })
   })
 }

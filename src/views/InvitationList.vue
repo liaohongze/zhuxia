@@ -2,51 +2,36 @@
   <div id="personal-page">
     <div class="top_bg">
       <div class="userimg">
-        <img
-          :src="userInfo.headimgurl"
-          alt=""
-        >
+        <img :src="userInfo.headimgurl" alt="" />
       </div>
       <div class="username">
-        <h4>{{userInfo.nickname}}</h4>
-        <p id="userid">UID:{{userInfo.id}}</p>
+        <h4>{{ userInfo.nickname }}</h4>
+        <p id="userid">UID:{{ userInfo.id }}</p>
       </div>
     </div>
     <div class="henglan_title">
-      <p>每邀请一位好友关注本公众号，你的<span>积分+12</span></p>
+      <p>
+        每邀请一位好友关注本公众号，你的
+        <span>积分+12</span>
+      </p>
     </div>
-    <div
-      class="noinvitation"
-      v-if="!recordList.length"
-    >
-      <img
-        src="@/assets/images/noinvitation-img.png"
-        alt="0元购"
-      >
+    <div class="noinvitation" v-if="!recordList.length">
+      <img src="@/assets/images/noinvitation-img.png" alt="0元购" />
       <p>您还没有任何邀请</p>
     </div>
-    <div
-      class="hasinvitation"
-      v-if="recordList.length"
-    >
+    <div class="hasinvitation" v-if="recordList.length">
       <div class="invitation">
         <div class="invitation_title">
-          <div> <span>邀请列表:</span></div>
+          <div><span>邀请列表:</span></div>
         </div>
         <div class="recordList">
           <ul>
-            <li
-              v-for="(item,index) in recordList"
-              :key="index"
-            >
+            <li v-for="(item, index) in recordList" :key="index">
               <div class="recordlf">
-                <img
-                  :src="item.src"
-                  alt=""
-                >
+                <img :src="item.src" alt="" />
                 <div>
-                  <p>{{item.username}}</p>
-                  <p>{{item.withdrawalTime}}</p>
+                  <p>{{ item.username }}</p>
+                  <p>{{ item.withdrawalTime }}</p>
                 </div>
               </div>
               <div class="clear"></div>
@@ -58,23 +43,10 @@
     <div class="invitationList">
       <button @click="openPopup">马上邀请</button>
     </div>
-    <van-popup
-      v-model="show"
-      position="bottom"
-      :style="{ height: '100%' }"
-    >
-      <img
-        src="@/assets/images/share_bg.png"
-        alt="邀请"
-      >
-      <div
-        class="close-btn"
-        @click="closePopup"
-      >
-        <img
-          src="@/assets/images/close-btn.png"
-          alt="关闭"
-        >
+    <van-popup v-model="show" position="bottom" :style="{ height: '100%' }">
+      <img src="@/assets/images/share_bg.png" alt="邀请" />
+      <div class="close-btn" @click="closePopup">
+        <img src="@/assets/images/close-btn.png" alt="关闭" />
       </div>
     </van-popup>
   </div>
@@ -133,12 +105,11 @@ export default {
       this.show = false
     }
   },
-   computed:{
+  computed: {
     ...mapGetters(['userInfo'])
-  },
+  }
 }
 </script>
-
 
 <style lang="less" scoped>
 .top_bg {
@@ -339,4 +310,3 @@ export default {
   }
 }
 </style>
-

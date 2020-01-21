@@ -42,15 +42,27 @@ export default [
     method: 'get'
   },
   {
+    //获取图形验证码
+    name: 'getCaptcha',
+    path: '/api/v1/redpacks/captcha',
+    method: 'get'
+  },
+  {
+    //发送短信
+    name: 'sendSms',
+    path: '/api/v1/redpacks/sendSms',
+    method: 'post'
+  },
+  {
+    //短信验证码登录
+    name: 'loginBySms',
+    path: '/api/v1/redpacks/loginBySms',
+    method: 'post'
+  },
+  {
     //领取红包
     name: 'getredPacks',
     path: '/api/v1/redpacks',
     method: 'post'
-  },
-  // {
-  //   //邀请列表
-  //   name: 'getredPacks',
-  //   path: '/api/cms/records',
-  //   method: 'post'
-  // },
+  }
 ]

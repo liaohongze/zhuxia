@@ -3,18 +3,15 @@
     <div class="record" v-if="recordList.length">
       <div class="recordList">
         <ul>
-          <li
-            v-for="(item,index) in recordList"
-            :key="index"
-          >
+          <li v-for="(item, index) in recordList" :key="index">
             <div class="recordlf">
               <div>
-                <p>{{item.title}}</p>
-                <p>{{item.operationTime}}</p>
+                <p>{{ item.title }}</p>
+                <p>{{ item.operationTime }}</p>
               </div>
             </div>
             <div class="recordrt">
-              <span>{{item.operationMoney}}</span>
+              <span>{{ item.operationMoney }}</span>
             </div>
             <div class="clear"></div>
           </li>
@@ -24,10 +21,7 @@
     </div>
     <div id="RechargeRecordNoData-page" v-if="!recordList.length">
       <div class="nodata">
-        <img
-          src="@/assets/images/noData-img.png"
-          alt=""
-        >
+        <img src="@/assets/images/noData-img.png" alt="" />
         <p>暂无充值记录</p>
       </div>
     </div>
@@ -82,7 +76,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="less" scoped>
 #RechargeRecord-page {
@@ -174,4 +167,3 @@ export default {
   }
 }
 </style>
-

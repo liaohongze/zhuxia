@@ -2,122 +2,91 @@
   <div id="personal-page">
     <div class="top_bg">
       <div class="userimg">
-        <img
-          :src="userInfo.headimgurl"
-          alt="0元购"
-        >
+        <img :src="userInfo.headimgurl" alt="0元购" />
       </div>
       <div class="username">
-        <h4>{{userInfo.nickname}}</h4>
-        <p id="userid">UID:{{userInfo.id}}</p>
+        <h4>{{ userInfo.nickname }}</h4>
+        <p id="userid">UID:{{ userInfo.id }}</p>
       </div>
-      <button
-        class="tag-read"
-        @click="copy"
-        :data-clipboard-text="userId"
-      >点击复制</button>
+      <button class="tag-read" @click="copy" :data-clipboard-text="userId">
+        点击复制
+      </button>
     </div>
     <div class="twomsg">
       <ul>
         <li>
-          <h3>{{userInfo.score}}</h3>
+          <h3>{{ userInfo.score }}</h3>
           <span>积分</span>
           <p>
-            <img
-              src="@/assets/images/jifen-icon.png"
-              alt="0元购"
-            >
-            <a href=""> 查看积分></a>
+            <img src="@/assets/images/jifen-icon.png" alt="0元购" />
+            <a href="">查看积分></a>
           </p>
         </li>
         <li>
-          <h3>{{userInfo.cms}}</h3>
+          <h3>{{ userInfo.cms }}</h3>
           <span>元</span>
           <p>
-            <img
-              src="@/assets/images/yongjin-icon.png"
-              alt="0元购"
-            >
-            <a href=""> 提现佣金></a>
+            <img src="@/assets/images/yongjin-icon.png" alt="0元购" />
+            <a href="">提现佣金></a>
           </p>
         </li>
       </ul>
     </div>
-    <div class="hengfu" >
+    <div class="hengfu">
       <van-swipe vertical loop :autoplay="3000">
-          <van-swipe-item @click="openTc(index)" v-for="(item, index) in Announcements" :key="index">
-              <p>{{item.title}}</p>
-          </van-swipe-item>
-        </van-swipe>
+        <van-swipe-item
+          @click="openTc(index)"
+          v-for="(item, index) in Announcements"
+          :key="index"
+        >
+          <p>{{ item.title }}</p>
+        </van-swipe-item>
+      </van-swipe>
     </div>
     <div class="datalist">
       <ul>
         <router-link to="./chongzhiIntegral">
           <li>
-            <img
-              src="@/assets/images/jifen_img.png"
-              alt="积分充值"
-            >
+            <img src="@/assets/images/jifen_img.png" alt="积分充值" />
             <p>积分充值</p>
           </li>
-         </router-link>
-       <router-link to="./chongzhiIntegral">
+        </router-link>
+        <router-link to="./chongzhiIntegral">
           <li>
-            <img
-              src="@/assets/images/haoyou_img.png"
-              alt="好友列表"
-            >
+            <img src="@/assets/images/haoyou_img.png" alt="好友列表" />
             <p>好友列表</p>
           </li>
-       </router-link>
+        </router-link>
         <a href="">
           <li>
-            <img
-              src="@/assets/images/wenti_img.png"
-              alt="常见问题"
-            >
+            <img src="@/assets/images/wenti_img.png" alt="常见问题" />
             <p>常见问题</p>
           </li>
         </a>
         <a href="">
           <li>
-            <img
-              src="@/assets/images/yaoqing_img.png"
-              alt="邀请好友"
-            >
+            <img src="@/assets/images/yaoqing_img.png" alt="邀请好友" />
             <p>邀请好友</p>
           </li>
         </a>
         <a href="">
           <li>
-            <img
-              src="@/assets/images/xiaoxi_img.png"
-              alt="联系客服"
-            >
+            <img src="@/assets/images/xiaoxi_img.png" alt="联系客服" />
             <p>联系客服</p>
           </li>
         </a>
         <a href="">
           <li>
-            <img
-              src="@/assets/images/liwu_img.png"
-              alt="福利中心"
-            >
+            <img src="@/assets/images/liwu_img.png" alt="福利中心" />
             <p>福利中心</p>
           </li>
         </a>
       </ul>
-      <van-overlay
-        :show="show"
-        @click="show = false"
-      >
+      <van-overlay :show="show" @click="show = false">
         <div class="wrapper">
           <div class="block">
             <h3>公告</h3>
-            <img
-              src="@/assets/images/close-btn.png"
-              alt="福利中心"
-            >
+            <img src="@/assets/images/close-btn.png" alt="福利中心" />
             <p v-html="Announcements[theIndex].content"></p>
             <button>我知道了</button>
           </div>
@@ -138,8 +107,8 @@ export default {
     return {
       userId: '198493875',
       show: false,
-      Announcements:[],
-      theIndex:0
+      Announcements: [],
+      theIndex: 0
       // platform :JSON.parse(localStorage.getItem('platform'))
     }
   },
@@ -170,22 +139,21 @@ export default {
         clipboard.destroy()
       })
     },
-    openTc(i){
+    openTc(i) {
       this.show = true
       this.theIndex = i
     },
-    async getAnnouncements(){
+    async getAnnouncements() {
       const res = await this.$api.Announcements({})
       this.Announcements = res
       console.log(res)
     }
   },
-   computed:{
+  computed: {
     ...mapGetters(['userInfo'])
-  },
+  }
 }
 </script>
-
 
 <style lang="less" scoped>
 .top_bg {
@@ -271,7 +239,7 @@ export default {
           rgba(243, 25, 60, 1) 0%,
           rgba(253, 153, 121, 1) 100%
         );
-        -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
         display: inline-block;
       }
@@ -296,8 +264,6 @@ export default {
           vertical-align: middle;
           margin-right: 1.1vw;
         }
-        a {
-        }
       }
       &:nth-of-type(2) {
         p {
@@ -318,16 +284,16 @@ export default {
   border-radius: 1.3vw;
   margin-top: 2vw;
   line-height: 10.2vw;
-      .van-swipe {
+  .van-swipe {
+    height: 10.2vw;
+    .van-swipe-item {
+      font-size: 3.3vw;
+      font-weight: 400;
       height: 10.2vw;
-      .van-swipe-item {
-        font-size: 3.3vw;
-        font-weight: 400;
-         height: 10.2vw;
-        line-height: 10.2vw;
-      }
+      line-height: 10.2vw;
     }
-   
+  }
+
   p {
     height: 3.9vw;
     font-size: 3.7vw;
@@ -434,9 +400,7 @@ export default {
     margin-top: 2.5vw;
   }
 }
-/deep/
- .van-swipe__indicators--vertical{
-      display: none!important;
-  }
+/deep/ .van-swipe__indicators--vertical {
+  display: none !important;
+}
 </style>
-
